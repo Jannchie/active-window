@@ -1,11 +1,11 @@
 {
   "name": "@jannchie/active-window",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "Yves Hoppe <contact@bytee.net> (https://bytee.net), nullx <mail@nullx.me> (nullx.me)",
-  "homepage": "https://bytee.net, https://nullx.me",
+  "homepage": "https://github.com/Jannchie/active-window",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nullxx/active-windows"
+    "url": "https://github.com/Jannchie/active-window"
   },
   "keywords": [
     "current-window",

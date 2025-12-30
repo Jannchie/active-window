@@ -17,14 +17,18 @@ void windowwindows::getActiveWindow(Napi::Object& obj) {
 	DWORD pid;
 	GetWindowThreadProcessId(foreground_window, &pid);
 	// Process
-	TCHAR process_filename[MAX_PATH];
+	WCHAR process_filename[MAX_PATH];
 	DWORD charsCarried = MAX_PATH;
+	process_filename[0] = L'\0';
 
 	HANDLE hProc = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_QUERY_INFORMATION, false, pid);
+	if (hProc != NULL) {
+		QueryFullProcessImageNameW(hProc, 0, process_filename, &charsCarried);
+		CloseHandle(hProc);
+	}
 
-	QueryFullProcessImageNameA(hProc, 0, process_filename, &charsCarried);
-
-	std::string fullpath = process_filename;
+	std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+	std::string fullpath = myconv.to_bytes(process_filename);
 
 	const size_t last_slash_idx = fullpath.find_last_of("\\/");
 
@@ -42,7 +46,6 @@ void windowwindows::getActiveWindow(Napi::Object& obj) {
 	idle_time = (GetTickCount() - last_input.dwTime) / 1000;
 
 	std::wstring ws( window_title );
-	std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
 
 	obj.Set("os", "windows");
 	obj.Set("windowClass", fullpath);
