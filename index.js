@@ -4,7 +4,13 @@ const exec = require("child_process").exec;
 const fs = require("fs");
 const path = require("path");
 const mac_d = path.join(__dirname, "/mac/window");
-module.exports = () => {
+const {
+  listRunningProcessNames,
+  listWindowsProcessPaths,
+  getWindowsProcessNameByPid,
+} = require("./processes");
+
+const createActiveWindow = () => {
   if (os.platform() == "darwin") {
     return {
       getActiveWindow: () => {
@@ -49,3 +55,9 @@ module.exports = () => {
     };
   }
 };
+
+createActiveWindow.listRunningProcessNames = listRunningProcessNames;
+createActiveWindow.listWindowsProcessPaths = listWindowsProcessPaths;
+createActiveWindow.getWindowsProcessNameByPid = getWindowsProcessNameByPid;
+
+module.exports = createActiveWindow;

@@ -26,6 +26,7 @@
   "license": "MIT",
   "dependencies": {
     "fs": "^0.0.1-security",
+    "iconv-lite": "^0.7.0",
     "node-addon-api": "^1.7.1"
   },
   "binary": {
