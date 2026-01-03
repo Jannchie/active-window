@@ -9,7 +9,7 @@ Work in progress. Not on every platform all information are supported.
 ### Building / Installation
 
 ```bash
-yarn install
+pnpm install
 ```
 or
 ```bash
